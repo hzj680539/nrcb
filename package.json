@@ -1,0 +1,25 @@
+{
+  "name": "nrcb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hzj680539/nrcb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hzj680539/nrcb/issues"
+  },
+  "homepage": "https://github.com/hzj680539/nrcb#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "eventproxy": "^1.0.0",
+    "json-stringify": "^1.0.0",
+    "superagent": "^3.8.2"
+  }
+}
