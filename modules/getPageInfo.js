@@ -69,7 +69,7 @@ function getPageInfo (pageInfo) {
             pageInfoList.push({id: pageInfo.id, title: pageInfo.title, imgList: imgList})
             console.log()
             console.log("=================================================================")
-            console.log(pageInfoList)
+            console.log()
         }
     )
 }

@@ -65,7 +65,7 @@ function getListInfo (pageNum) {
             }
             console.log()
             console.log("=================================================================")
-            console.log(summaryInfoList)
+            console.log()
         }
     )
 }
