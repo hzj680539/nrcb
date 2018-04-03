@@ -9,6 +9,7 @@ var stringify = require('json-stringify');
 var fs = require("fs")
 
 var count = 0
+var MAX_PAGE = 50
 var summaryInfoList = []
 
 function start() {
@@ -20,18 +21,18 @@ function start() {
         var pageNum = 1
         var interval = ''
         interval = setInterval(function(){
-            if (pageNum <= 5) {
+            if (pageNum <= MAX_PAGE) {
                 getListInfo(pageNum)
                 pageNum++
             } else {
                 clearInterval(interval)
-                console.log(summaryInfoList)
+                console.log('title 数量', summaryInfoList.length)
                 fs.writeFile('file/summaryInfoList.json', stringify(summaryInfoList))
                 setTimeout(function() {
                     process.exit(); // 退出进程
                 }, 5000)
             }
-        }, 5000)
+        }, 2000)
     }
 
     http.createServer(onRequest).listen(5000);
@@ -55,9 +56,10 @@ function getListInfo (pageNum) {
             console.log("$photoList.length:", $photoList.length)
             for (var i=0; i<$photoList.length; i++) {
                 var item = $photoList[i]
+                let id = item.attribs.href.substr(21, 4)
                 summaryInfoList.push(
                     {
-                        id: ++count,
+                        id: id,
                         title: item.children[0].data,
                         href: item.attribs.href
                     }
