@@ -17,7 +17,7 @@ function start() {
         console.log("started ...");
         res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
         res.write("<p>" + "hellow world" + "</p>");
-        var data = fs.readFileSync('file/summaryInfoList.json');
+        var data = fs.readFileSync('file2/summaryInfoList.json');
         summaryInfoList = JSON.parse(data)
         summaryInfoListLength = summaryInfoList.length
         console.log("title 数量: " + summaryInfoListLength);
@@ -32,12 +32,12 @@ function start() {
             } else {
                 clearInterval(interval)
                 console.log('pageInfo 数量', pageInfoList.length)
-                fs.writeFile('file/pageInfoList.json', stringify(pageInfoList))
+                fs.writeFile('file2/pageInfoList.json', stringify(pageInfoList))
                 setTimeout(function() {
                     process.exit(); // 退出进程
                 }, 5000)
             }
-        }, 2000)
+        }, 1000)
 
     }
 

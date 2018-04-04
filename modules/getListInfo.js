@@ -27,19 +27,19 @@ function start() {
             } else {
                 clearInterval(interval)
                 console.log('title 数量', summaryInfoList.length)
-                fs.writeFile('file/summaryInfoList.json', stringify(summaryInfoList))
+                fs.writeFile('file2/summaryInfoList.json', stringify(summaryInfoList))
                 setTimeout(function() {
                     process.exit(); // 退出进程
                 }, 5000)
             }
-        }, 2000)
+        }, 1000)
     }
 
     http.createServer(onRequest).listen(5000);
 }
 
 function getListInfo (pageNum) {
-    var requestUrl = encodeURI("http://www.nrcb3.com/Photos/showPhotosList?name=网友自拍&page=" + pageNum);
+    var requestUrl = encodeURI("http://www.nrcb3.com/Photos/showPhotosList?name=偷窥偷拍&page=" + pageNum);
     superagent.get(requestUrl)
         .set('User-Agent', "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36")
         .set('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
