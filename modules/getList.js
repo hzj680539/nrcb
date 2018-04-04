@@ -9,8 +9,9 @@ var stringify = require('json-stringify');
 var fs = require("fs")
 
 var count = 0
-var MAX_PAGE = 50
+var MAX_PAGE = 52
 var summaryInfoList = []
+var folderName = 'file2'
 
 function start() {
     function onRequest(req, res) {
@@ -27,18 +28,19 @@ function start() {
             } else {
                 clearInterval(interval)
                 console.log('title 数量', summaryInfoList.length)
-                fs.writeFile('file2/summaryInfoList.json', stringify(summaryInfoList))
+                fs.writeFile(folderName + '/list.json', stringify(summaryInfoList))
                 setTimeout(function() {
                     process.exit(); // 退出进程
-                }, 5000)
+                }, 3000)
             }
-        }, 1000)
+        }, 100)
     }
 
     http.createServer(onRequest).listen(5000);
 }
 
 function getListInfo (pageNum) {
+    // 网友自拍(87页), 偷窥偷拍(52页), 唯美写真(92页)
     var requestUrl = encodeURI("http://www.nrcb3.com/Photos/showPhotosList?name=偷窥偷拍&page=" + pageNum);
     superagent.get(requestUrl)
         .set('User-Agent', "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36")
@@ -53,15 +55,14 @@ function getListInfo (pageNum) {
             }
             var $ = cheerio.load(sres.text)
             var $photoList = $(".photos_list a")
-            console.log("$photoList.length:", $photoList.length)
+            console.log("本页数量:", $photoList.length)
             for (var i=0; i<$photoList.length; i++) {
                 var item = $photoList[i]
                 let id = item.attribs.href.substr(21, 4)
                 summaryInfoList.push(
                     {
                         id: id,
-                        title: item.children[0].data,
-                        href: item.attribs.href
+                        t: item.children[0].data
                     }
                 )
             }
